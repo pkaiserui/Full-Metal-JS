@@ -25,5 +25,10 @@ angular.module('tinnr.recipes', [])
       $scope.nextRecipe();
     };
 
+    $scope.saveRecipeServer = function(){
+      Meals.saveMealServer($scope.recipes[$scope.currentIndex]);
+      $scope.nextRecipe();
+    }
+
     $scope.getRecipes();
   });

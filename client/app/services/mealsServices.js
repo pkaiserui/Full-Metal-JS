@@ -10,6 +10,7 @@ angular.module('tinnr.mealsServices', [])
     }
 
     meals.saveMeal = function (meal) {
+
       meals.list.push(meal);
     };
 
@@ -17,9 +18,10 @@ angular.module('tinnr.mealsServices', [])
     meals.getSavedMeals = function(){
       return $http({
         method: 'GET',
-        url: '/api/users/getSavedMeals'
+        url: '/api/users/meals'
       })
       .then(function (res) {
+
         return res.data;
       }, function (res) {
         console.error('Error: ', res);
@@ -27,9 +29,10 @@ angular.module('tinnr.mealsServices', [])
     }
 
     meals.saveMealServer = function(meal){
+      meal.mealId = 123213
       $http({
         method: 'POST',
-        url: '/api/users/getSavedMeals',
+        url: '/api/users/meals',
         data: meal
       })
       .then(function (resp) {

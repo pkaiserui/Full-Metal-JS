@@ -3,9 +3,9 @@ angular.module('tinnr.meals', [])
     $scope.meals = Meals.list;
 
   	$scope.getMeals = function () {
-  		Meal.getAll()
+  		Meals.getSavedMeals()
   			.then(function (data) {
-  				$scope.meals = data;
+  				$scope.meals.list = data;
   			})
   			.catch(function (error) {
   				console.error('Error fetching meals: ', error);
@@ -13,9 +13,11 @@ angular.module('tinnr.meals', [])
   	}
 
     $scope.getMealsServer = function(){
-      Meal.getSavedMeals()
+      console.log("get meals is happening")
+      Meals.getSavedMeals()
         .then(function (data){
-          $scope.meals = data;
+          console.log("data is coming",data)
+          $scope.meals.list = data;
         })
         .catch(function (error){
           console.log('Error fetching meals', error);
