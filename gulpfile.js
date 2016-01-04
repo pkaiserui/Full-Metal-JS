@@ -15,6 +15,7 @@ var paths = {
   html: ['client/app/**/*.html', 'client/index.html'],
   styles: ['client/scss/**/*.scss'],
   assets: ['client/img/**/*'],
+  fonts: ['client/fonts/**/*'],
   test: ['specs/**/*.js']
 };
 
@@ -24,6 +25,11 @@ gulp.task('clean', function(cb) {
 });
 
 // Copies everything in the client folder except templates, Sass, and JS
+gulp.task('copyFonts', function() {
+  return gulp.src(paths.fonts)
+    .pipe(gulp.dest('client/build/assets/fonts'));
+});
+
 gulp.task('copy', function() {
   return gulp.src(paths.assets)
     .pipe(gulp.dest('client/build/assets/img'));
@@ -62,7 +68,7 @@ gulp.task('serve', ['build'], function() {
 });
 
 gulp.task('build', function(cb) {
-  sequence('clean', ['copy', 'build-css', 'build-js'], cb);
+  sequence('clean', ['copy','copyFonts', 'build-css', 'build-js'], cb);
 });
 
 gulp.task('eslint', function() {
